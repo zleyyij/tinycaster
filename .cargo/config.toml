@@ -1,0 +1,11 @@
+[build]
+target = "wasm32-unknown-unknown"
+
+[target.wasm32-unknown-unknown]
+# w4 has very small memory limits, also pre-allocate some stuff
+rustflags = [
+    "-C", "link-arg=--import-memory",
+    "-C", "link-arg=--initial-memory=65536",
+    "-C", "link-arg=--max-memory=65536",
+    "-C", "link-arg=-zstack-size=14752",
+]

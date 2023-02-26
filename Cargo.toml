@@ -1,0 +1,23 @@
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[package]
+name = "tinycaster"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+# Generate as a dynamic library targeting a C ABI https://users.rust-lang.org/t/what-is-the-difference-between-dylib-and-cdylib/28847/3
+crate-type = ["cdylib"]
+
+[profile.release]
+# make it very very smol
+opt-level = "z"
+lto = true
+codegen-units = 1
+strip = true
+
+panic = "abort"
+
+
+[dependencies]
+# Because this is nostd this is needed for some math
+libm = "0.2"
